@@ -27,11 +27,13 @@ export default {
     setup(props) {
         const { stats } = toRefs(props);
         const mlbDataRef = ref({});
+        // Use vue-final-modal
         const { open, close } = useModal({
             component: ModalConfirm,
             attrs: {
                 title: stats.value.people[0].fullName,
                 onConfirm() {
+                    // Show hitter data in hitterProfile on modal close for purposes of reading data easily
                     loadHitterData();
                     close()
                 },
@@ -40,6 +42,8 @@ export default {
                 default: stats.value.people[0].link,
             },
         })
+        // Load Hitter data from 2022
+        // TODO: Allow user to choose the year
         const loadHitterData = async () => {
             mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2022", "hitting");
 

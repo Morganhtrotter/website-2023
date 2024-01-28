@@ -64,7 +64,6 @@ export default {
     setup(props) {
         var showHideButton = ref({});
         const mlbDataRef = ref({});
-        const playerData = ref({});
         const teamHitterData = ref({});
         const teamPitcherData = ref({});
         const { teamId } = toRefs(props);
@@ -104,10 +103,6 @@ export default {
                 return;
             }
         };
-        const loadPlayerData = async () => {
-            playerData.value = await mlbDataAPI.player_stats("592450", "2022", "hitting");
-            console.log("playerData.value: " + JSON.stringify(playerData.value));
-        };
         showHideButton.value = "Show";
         var hasBeenClicked = false;
         var loadRosterData = false;
@@ -115,7 +110,6 @@ export default {
             mlbDataRef,
             loadMLBData,
             showHideButton,
-            loadPlayerData,
             hasBeenClicked,
             teamHitterData,
             teamPitcherData,
