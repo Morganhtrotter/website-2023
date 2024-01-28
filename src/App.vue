@@ -9,7 +9,7 @@ import { ModalsContainer } from 'vue-final-modal'
   </header>
 
   <main>
-    <div class="h-screen flex items-center justify-center">
+    <div>
       <TheWelcome />
     </div>
     <div>

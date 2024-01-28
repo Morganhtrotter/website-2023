@@ -371,6 +371,7 @@ export default {
   border: 1px solid blue;
   border-radius: 0.5rem;
   margin: 1rem 0;
+  transition: all 0.7s ease-in-out;
 }
 
 #lad .details {

@@ -5,6 +5,7 @@
                 <h5 v-if="this.stats.people[0].primaryNumber">{{ this.stats.people[0].primaryNumber }}</h5>
                 <h5 v-else>NA</h5>
                 <h4>{{ this.stats.people[0].fullName }} <p>{{ this.stats.people[0].primaryPosition.abbreviation }}</p></h4>
+                {{ mlbDataRef }}
             </div>
         </div>
         <ModalsContainer />
@@ -13,7 +14,8 @@
 <script>
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ModalConfirm from './ModalConfirm.vue'
-import { toRefs } from 'vue';
+import { ref, toRefs } from 'vue';
+import mlbDataAPI from '../api/resources/mlbData.js';
 
 export default {
     props: {
@@ -24,22 +26,35 @@ export default {
     },
     setup(props) {
         const { stats } = toRefs(props);
+        const mlbDataRef = ref({});
         const { open, close } = useModal({
             component: ModalConfirm,
             attrs: {
                 title: stats.value.people[0].fullName,
                 onConfirm() {
+                    loadHitterData();
                     close()
                 },
             },
             slots: {
-                default: '<p>The content of the modal</p>',
+                default: stats.value.people[0].link,
             },
         })
+        const loadHitterData = async () => {
+            mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2022", "hitting");
+
+            console.log(mlbDataRef.value);
+        };
         return {
             open,
-            close
+            close,
+            mlbDataRef,
+            loadHitterData
         };
+    },
+    computed: {
+        console: () => console,
+        window: () => window
     }
 }
 </script>

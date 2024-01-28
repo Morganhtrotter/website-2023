@@ -1,5 +1,6 @@
 import { APISettings } from '../config.js';
 
+// Custom API for statsapi.mlb.com
 export default {
     
     index(latterURL) {
