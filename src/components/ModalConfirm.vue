@@ -1,15 +1,3 @@
-<script setup lang="ts">
-import { VueFinalModal } from 'vue-final-modal'
-
-defineProps<{
-    title?: string
-}>()
-
-const emit = defineEmits<{
-    (e: 'confirm'): void
-}>()
-</script>
-
 <template>
     <VueFinalModal
     class="confirm-modal"
@@ -18,12 +6,26 @@ const emit = defineEmits<{
     content-transition="vfm-fade"
     >
         <h1>{{ title }}</h1>
+        <h2>{{ average }}</h2>
         <slot />
         <button @click="emit('confirm')">
             Confirm
         </button>
     </VueFinalModal>
 </template>
+
+<script setup lang="ts">
+import { VueFinalModal } from 'vue-final-modal'
+
+defineProps<{
+    title?: string,
+    average?: string
+}>()
+
+const emit = defineEmits<{
+    (e: 'confirm'): void
+}>()
+</script>
 
 <style>
 .confirm-modal {

@@ -14,7 +14,7 @@
 <script>
 import { ModalsContainer, useModal } from 'vue-final-modal'
 import ModalConfirm from './ModalConfirm.vue'
-import { ref, toRefs } from 'vue';
+import { ref, toRefs, onMounted } from 'vue';
 import mlbDataAPI from '../api/resources/mlbData.js';
 
 export default {
@@ -32,9 +32,9 @@ export default {
             component: ModalConfirm,
             attrs: {
                 title: stats.value.people[0].fullName,
+                average: mlbDataRef.value,
                 onConfirm() {
-                    // Show hitter data in hitterProfile on modal close for purposes of reading data easily
-                    loadHitterData();
+                    // Temporarily show hitter data in hitterProfile on modal close for purposes of reading data easily
                     close()
                 },
             },
@@ -42,6 +42,10 @@ export default {
                 default: stats.value.people[0].link,
             },
         })
+
+        onMounted(() => {
+            loadHitterData();
+        });
         // Load Hitter data from 2022
         // TODO: Allow user to choose the year
         const loadHitterData = async () => {
