@@ -1,11 +1,12 @@
 <template>
     <div class="hitter-prof-wrapper" @click="open">
-        <div v-if="this.stats.people">
+        <div :class="this.stats.people[0].nameSlug" v-if="this.stats.people">
             <div class="header-wrapper">
                 <h5 v-if="this.stats.people[0].primaryNumber">{{ this.stats.people[0].primaryNumber }}</h5>
                 <h5 v-else>NA</h5>
                 <h4>{{ this.stats.people[0].fullName }} <p>{{ this.stats.people[0].primaryPosition.abbreviation }}</p></h4>
-                {{ mlbDataRef }}
+                <!-- {{ mlbDataRef.people ? mlbDataRef.people[0] : mlbDataRef }} -->
+                <svg></svg>
             </div>
         </div>
         <ModalsContainer />
@@ -16,6 +17,7 @@ import { ModalsContainer, useModal } from 'vue-final-modal'
 import ModalConfirm from './ModalConfirm.vue'
 import { ref, toRefs, onMounted } from 'vue';
 import mlbDataAPI from '../api/resources/mlbData.js';
+import * as d3 from "d3";
 
 export default {
     props: {
@@ -49,9 +51,35 @@ export default {
         // Load Hitter data from 2022
         // TODO: Allow user to choose the year
         const loadHitterData = async () => {
-            mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2022", "hitting");
+            mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2024", "hitting");
 
             console.log(mlbDataRef.value);
+
+            const width = 800;
+            const height = 200;
+            const fillColor = "#010101";
+
+            var dataset = [],
+            i = 0;
+
+            for(i=0; i<2; i++){
+                dataset.push(Math.round(Math.random()*100));
+            }   
+
+            const svg = d3.selectAll("." + stats.value.people[0].nameSlug + " svg").attr("width", width).attr("height", height).attr("background", fillColor);
+
+            const homeRuns = mlbDataRef.value.people[0].stats[0].splits[0].stat.homeRuns;
+
+            svg.selectAll("circle")
+                .data(dataset)
+                .enter().append("circle")
+                .style("stroke", "black")
+                .style("fill", "black")
+                .attr("r", homeRuns)
+                .attr("cx", 50)
+                .attr("cy", 50);
+            
+            const g = svg.append("g");
         };
         return {
             open,
