@@ -25,6 +25,8 @@
               <div v-if="(typeof playerTwo) !== 'string'">
                 <HitterProfile
                   :stats=playerTwo
+                  class="myHitter"
+                  ref="myHitter"
                 >
                 </HitterProfile>
               </div>
@@ -133,6 +135,13 @@ export default {
                 document.querySelector(".team-" + this.teamId).style.display = "none"; // Hide the player names wrapper
                 this.showHideButton = "Show";
             }
+        },
+        sayHello() {
+          if (this.$refs.myHitter) {
+            this.$refs.myHitter.forEach((hitter) => {
+              hitter.changeCircle();
+            });
+          }
         }
     },
     computed: {
@@ -334,7 +343,6 @@ export default {
 
 <style scoped lang="scss">
 .hitter {
-  width: 22%;
   min-width: 250px;
   margin-bottom: 8px;
 }
