@@ -54,7 +54,7 @@
 import mlbDataAPI from '../api/resources/mlbData.js';
 import HitterProfile from './HitterProfile.vue';
 import { ref, toRefs } from 'vue';
-import * as d3 from 'd3';
+import { useStore } from 'vuex'
 
 export default {
     props: {
@@ -69,50 +69,44 @@ export default {
         const teamHitterData = ref({});
         const teamPitcherData = ref({});
         const { teamId } = toRefs(props);
+        const store = useStore();
         const loadMLBData = async () => {
-            // TODO: move hasBeenClicked code to seperate function called in beforeMount
-            if (!hasBeenClicked) {
-                mlbDataRef.value = await mlbDataAPI.index("/api/v1/teams/" + teamId.value + "/roster");
-                console.log("Made GET() request: " + mlbDataRef.value);
-                const width = 800;
-                const height = 500;
-                hasBeenClicked = true;
-                let tempHitterData = new Array();
-                let tempPitcherData = new Array();
-                // For each player in roster, load player data
-                mlbDataRef.value.roster.forEach(async (player) => {
-                    if (player.position.code == 1) { // If player is a pitcher
-                        let pitcherStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "pitching");
-                        tempPitcherData.push(pitcherStatistics);
-                    }
-                    else {
-                        let playerStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "hitting");
-                        tempHitterData.push(playerStatistics);
-                    }
-                });
-                teamHitterData.value = tempHitterData;
-                teamPitcherData.value = tempPitcherData;
-            }
-            else {
-                if (showHideButton === "Show") {
-                    document.querySelector(".team-" + teamId.value).style.display = "block"; // Show the player names wrapper
-                    showHideButton = "Hide";
+            mlbDataRef.value = await mlbDataAPI.index("/api/v1/teams/" + teamId.value + "/roster");
+            console.log("Made GET() request: " + mlbDataRef.value);
+            const width = 800;
+            const height = 500;
+            let tempHitterData = new Array();
+            let tempPitcherData = new Array();
+            // For each player in roster, load player data
+            mlbDataRef.value.roster.forEach(async (player) => {
+                if (player.position.code == 1) { // If player is a pitcher
+                    let pitcherStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "pitching");
+                    tempPitcherData.push(pitcherStatistics);
                 }
                 else {
-                    document.querySelector(".team-" + teamId.value).style.display = "none"; // Hide the player names wrapper
-                    showHideButton = "Show";
+                    let playerStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "hitting");
+                    tempHitterData.push(playerStatistics);
                 }
-                return;
-            }
+            });
+            teamHitterData.value = tempHitterData;
+            teamPitcherData.value = tempPitcherData;
+            increment();
         };
         showHideButton.value = "Show";
-        var hasBeenClicked = false;
         var loadRosterData = false;
+        function increment() {
+            if (true) {
+                let tempHitterStore = [teamHitterData.value, teamId.value];
+                let tempPitcherStore = [teamPitcherData, teamId];
+                store.commit("addPlayers", tempHitterStore);
+                store.commit("addPlayers", tempPitcherStore);
+                loadRosterData = true;
+            }
+        }
         return {
             mlbDataRef,
             loadMLBData,
             showHideButton,
-            hasBeenClicked,
             teamHitterData,
             teamPitcherData,
             loadRosterData
@@ -120,6 +114,7 @@ export default {
     },
     methods: {
         increment() {
+            // Issue: getTeamHitting is called before data is committed to vuex store so need to run this block again
             if (!this.loadRosterData) {
                 let tempHitterStore = [this.teamHitterData, this.teamId];
                 let tempPitcherStore = [this.teamPitcherData, this.teamId];
@@ -138,7 +133,7 @@ export default {
         },
         sayHello() {
           if (this.$refs.myHitter) {
-            this.$refs.myHitter.forEach((hitter) => {
+              this.$refs.myHitter.forEach((hitter) => {
               hitter.changeCircle();
             });
           }

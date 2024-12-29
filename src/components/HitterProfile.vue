@@ -53,7 +53,7 @@ export default {
         const loadHitterData = async () => {
             mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2024", "hitting");
 
-            console.log(mlbDataRef.value);
+            //console.log(mlbDataRef.value);
 
             const width = "100%";
             const height = "100%";
