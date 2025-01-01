@@ -13,10 +13,9 @@
     </div>
 </template>
 <script>
-import { ModalsContainer, useModal } from 'vue-final-modal'
+import { useModal } from 'vue-final-modal'
 import ModalConfirm from './ModalConfirm.vue'
 import { ref, toRefs, onMounted } from 'vue';
-import mlbDataAPI from '../api/resources/mlbData.js';
 import * as d3 from "d3";
 
 export default {
@@ -51,10 +50,6 @@ export default {
         // Load Hitter data from 2024
         // TODO: Allow user to choose the year
         const loadHitterData = async () => {
-            mlbDataRef.value = await mlbDataAPI.player_stats(stats.value.people[0].id, "2024", "hitting");
-
-            //console.log(mlbDataRef.value);
-
             const width = "100%";
             const height = "100%";
             const fillColor = "#010101";
@@ -68,7 +63,7 @@ export default {
             }   
 
             const svg = d3.selectAll("." + stats.value.people[0].nameSlug + " svg").attr("width", width).attr("height", height).attr("background", fillColor);
-            const homeRuns = mlbDataRef.value.people[0].stats[0].splits[0].stat.homeRuns;
+            const homeRuns = stats.value.people[0].stats[0].splits[0].stat.homeRuns;
 
             // Set circles to homeruns by default
             svg.selectAll("circle")
@@ -85,15 +80,14 @@ export default {
         return {
             open,
             close,
-            mlbDataRef,
             loadHitterData
         };
     },
     methods: {
         changeCircle() {
-            if (this.mlbDataRef.people[0].stats?.[0]?.splits?.[0]?.stat?.avg) {
-                const svg = d3.selectAll("." + this.mlbDataRef.people[0].nameSlug + " svg");
-                const avg = parseFloat(this.mlbDataRef.people[0].stats[0].splits[0].stat.avg) * 100;
+            if (this.stats.people[0].stats?.[0]?.splits?.[0]?.stat?.avg) {
+                const svg = d3.selectAll("." + this.stats.people[0].nameSlug + " svg");
+                const avg = parseFloat(this.stats.people[0].stats[0].splits[0].stat.avg) * 100;
                 //console.log(parseFloat(avg) * 100);
                 var dataset = [],
                 i = 0;

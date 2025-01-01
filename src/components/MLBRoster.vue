@@ -71,20 +71,18 @@ export default {
         const { teamId } = toRefs(props);
         const store = useStore();
         const loadMLBData = async () => {
-            mlbDataRef.value = await mlbDataAPI.index("/api/v1/teams/" + teamId.value + "/roster");
+            mlbDataRef.value = await mlbDataAPI.roster(teamId.value);
             console.log("Made GET() request: " + mlbDataRef.value);
-            const width = 800;
-            const height = 500;
             let tempHitterData = new Array();
             let tempPitcherData = new Array();
             // For each player in roster, load player data
             mlbDataRef.value.roster.forEach(async (player) => {
                 if (player.position.code == 1) { // If player is a pitcher
-                    let pitcherStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "pitching");
+                    let pitcherStatistics = await mlbDataAPI.player_stats(player.person.id, "2024", "pitching");
                     tempPitcherData.push(pitcherStatistics);
                 }
                 else {
-                    let playerStatistics = await mlbDataAPI.player_stats(player.person.id, "2022", "hitting");
+                    let playerStatistics = await mlbDataAPI.player_stats(player.person.id, "2024", "hitting");
                     tempHitterData.push(playerStatistics);
                 }
             });
