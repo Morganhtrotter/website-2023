@@ -46,5 +46,9 @@ header {
     place-items: flex-start;
     flex-wrap: wrap;
   }
+
+  main > div:first-of-type {
+    width: 74%;
+  }
 }
 </style>

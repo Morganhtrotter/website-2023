@@ -289,4 +289,89 @@ import MLBRoster from './MLBRoster.vue'
 
 
 <style scoped lang="scss">
+#nlWest::before {
+  content: "nl west";
+  top: 46%;
+  position: absolute;
+  left: -175px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#nlCentral::before {
+  content: "nl central";
+  top: 45%;
+  position: absolute;
+  left: -214px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#nlEast::before {
+  content: "nl east";
+  top: 45%;
+  position: absolute;
+  left: -170px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#alWest::before {
+  content: "al west";
+  top: 45%;
+  position: absolute;
+  left: -175px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#alCentral::before {
+  content: "al central";
+  top: 45%;
+  position: absolute;
+  left: -214px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#alEast::before {
+  content: "al east";
+  top: 45%;
+  position: absolute;
+  left: -170px;
+  transform: rotate(-90deg);
+  text-transform: uppercase;
+  font-size: 40px;
+  letter-spacing: 4px;
+  color: var(--color-border);
+}
+
+#nlWest, #nlCentral, #nlEast, #alWest, #alCentral, #alEast {
+  margin-bottom: 40px;
+}
+
+#controls {
+  position: fixed;
+  left: 72%;
+  top: 10%;
+  height: 80%;
+  width: 20%;
+  padding-left: 2.5%;
+  border-left: 2px solid var(--color-border);
+}
 </style>

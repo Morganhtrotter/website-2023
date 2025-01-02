@@ -363,10 +363,13 @@ export default {
 .details {
   flex: 1;
   padding: 0.5rem calc(var(--section-gap) / 2);
-  border: 1px solid blue;
+  border: 4px solid blue;
   border-radius: 0.5rem;
   margin: 1rem 0;
   transition: all 0.7s ease-in-out;
+  .team-hitter-wrapper:nth-of-type(2) {
+    display: none;
+  }
 }
 
 #lad .details {
@@ -518,7 +521,7 @@ h3 {
     top: calc(50% - 25px);
     left: -26px;
     position: absolute;
-    border: 1px solid var(--color-border);
+    border: 4px solid var(--color-border);
     background: var(--color-background);
     border-radius: 8px;
     width: 50px;
@@ -528,24 +531,36 @@ h3 {
 
   .MLBRoster:before {
     content: ' ';
-    border-left: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-border);
+    border-bottom: 2px solid var(--color-border);
     position: absolute;
-    left: 0;
-    bottom: calc(50% + 25px);
-    height: calc(50% - 25px);
+    left: -50px;
+    width: 25px;
+    bottom: calc(50%);
+    height: calc(50%);
   }
 
   .MLBRoster:after {
     content: ' ';
-    border-left: 1px solid var(--color-border);
+    border-left: 4px solid var(--color-border);
+    border-top: 2px solid var(--color-border);
     position: absolute;
-    left: 0;
-    top: calc(50% + 25px);
-    height: calc(50% - 25px);
+    left: -50px;
+    width: 25px;
+    top: calc(50%);
+    height: calc(50%);
   }
 
   .MLBRoster:first-of-type:before {
     display: none;
+  }
+
+  .MLBRoster:first-of-type:after {
+    border-top: 4px solid var(--color-border);
+  }
+
+  .MLBRoster:last-of-type:before {
+    border-bottom: 4px solid var(--color-border);
   }
 
   .MLBRoster:last-of-type:after {
