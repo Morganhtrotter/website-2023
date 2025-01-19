@@ -374,125 +374,212 @@ export default {
 
 #lad .details {
   border-color: var(--dodger-blue);
+  h3 {
+    color: var(--dodger-blue);
+  }
 }
 
 #sf .details {
   border-color: var(--giant-orange);
-  .team-hitter-wrapper {
-    background-color: orange;
+  h3 {
+    color: var(--giant-orange);
   }
 }
 
 #sd .details {
   border-color: var(--padres-brown);
+  h3 {
+    color: var(--padres-brown);
+  }
 }
 
 #ari .details {
   border-color: var(--dbacks-red);
+  h3 {
+    color: var(--dbacks-red);
+  }
 }
 
 #col .details {
   border-color: var(--rockies-purple);
+  h3 {
+    color: var(--rockies-purple);
+  }
 }
 
 #stl .details {
   border-color: var(--cardinals-red);
+  h3 {
+    color: var(--cardinals-red);
+  }
 }
 
 #mil .details {
   border-color: var(--brewers-blue);
+  h3 {
+    color: var(--brewers-blue);
+  }
 }
 
 #chc .details {
   border-color: var(--cubs-blue);
+  h3 {
+    color: var(--cubs-blue);
+  }
 }
 
 #pit .details {
   border-color: var(--pirates-yellow);
+  h3 {
+    color: var(--pirates-yellow);
+  }
 }
 
 #cin .details {
   border-color: var(--reds-red);
+  h3 {
+    color: var(--reds-red);
+  }
 }
 
 #wsh .details {
   border-color: var(--nationals-red);
+  h3 {
+    color: var(--nationals-red);
+  }
 }
 
 #nym .details {
   border-color: var(--mets-blue);
+  h3 {
+    color: var(--mets-blue);
+  }
 }
 
 #phi .details {
   border-color: var(--phillies-red);
+  h3 {
+    color: var(--phillies-red);
+  }
 }
 
 #atl .details {
   border-color: var(--braves-blue);
+  h3 {
+    color: var(--braves-blue);
+  }
 }
 
 #mia .details {
   border-color: var(--marlins-blue);
+  h3 {
+    color: var(--marlins-blue);
+  }
 }
 
 #sea .details {
   border-color: var(--mariners-blue);
+  h3 {
+    color: var(--mariners-blue);
+  }
 }
 
 #hou .details {
   border-color: var(--astros-orange);
+  h3 {
+    color: var(--astros-orange);
+  }
 }
 
 #oak .details {
   border-color: var(--athletics-green);
+  h3 {
+    color: var(--athletics-green);
+  }
 }
 
 #laa .details {
   border-color: var(--angels-red);
+  h3 {
+    color: var(--angels-red);
+  }
 }
 
 #tex .details {
   border-color: var(--rangers-blue);
+  h3 {
+    color: var(--rangers-blue);
+  }
 }
 
 #min .details {
   border-color: var(--twins-blue);
+  h3 {
+    color: var(--twins-blue);
+  }
 }
 
 #det .details {
   border-color: var(--tigers-blue);
+  h3 {
+    color: var(--tigers-blue);
+  }
 }
 
 #cws .details {
   border-color: var(--white-sox-black);
+  h3 {
+    color: var(--white-sox-black);
+  }
 }
 
 #kc .details {
   border-color: var(--royals-blue);
+  h3 {
+    color: var(--royals-blue);
+  }
 }
 
 #cle .details {
   border-color: var(--guardians-red);
+  h3 {
+    color: var(--guardians-red);
+  }
 }
 
 #tor .details {
   border-color: var(--blue-jays-blue);
+  h3 {
+    color: var(--blue-jays-blue);
+  }
 }
 
 #nyy .details {
   border-color: var(--yankees-blue);
+  h3 {
+    color: var(--yankees-blue);
+  }
 }
 
 #bos .details {
   border-color: var(--red-sox-red);
+  h3 {
+    color: var(--red-sox-red);
+  }
 }
 
 #tb .details {
   border-color: var(--rays-blue);
+  h3 {
+    color: var(--rays-blue);
+  }
 }
 
 #bal .details {
   border-color: var(--orioles-orange);
+  h3 {
+    color: var(--orioles-orange);
+  }
 }
 
 i {
@@ -506,8 +593,11 @@ i {
 }
 
 h3 {
-  font-size: 1.2rem;
+  font-size: 32px;
+  font-family: "Nunito Sans", serif;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 4px;
   margin-bottom: 0.4rem;
   color: var(--color-heading);
 }

@@ -52,7 +52,7 @@ export default {
         const loadHitterData = async () => {
             const width = "100%";
             const height = "100%";
-            const fillColor = "#010101";
+            const fillColor = "#D3D3D3";
 
             var dataset = [],
             i = 0;
@@ -69,9 +69,9 @@ export default {
             svg.selectAll("circle")
                 .data(dataset)
                 .enter().append("circle")
-                .style("stroke", "black")
-                .style("fill", "black")
-                .attr("r", homeRuns)
+                .style("stroke", "#3d3d3d")
+                .style("fill", "#3d3d3d")
+                .attr("r", homeRuns / 2)
                 .attr("cx", 50)
                 .attr("cy", 50);
             
@@ -116,18 +116,27 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+
 .hitter-prof-wrapper {
     padding: 12px 20px;
-    border: 1px solid black;
-    border-radius: 2.5px;
+    border: 1px solid #36454F;
+    border-radius: 5px;
+    transition: background-color 0.3s linear;
 }
 .hitter-prof-wrapper:hover {
     cursor: pointer;
-    border: 1px solid magenta;
+    border: 1px solid white;
+    background-color: #36454F;
+    transition: background-color 0.3s linear;
 }
 
 .hitter-prof-wrapper:hover h4, .hitter-prof-wrapper:hover h5 {
-    color: magenta;
+    color: white;
+}
+
+.hitter-prof-wrapper:hover svg > * {
+    stroke: white !important;
+    fill: white !important;
 }
 
 p {
@@ -137,6 +146,15 @@ p {
 h4 p {
     padding-left: 8px;
     min-width: 30px;
+    font-weight: 600;
+}
+
+h4 {
+    font-family: "Source Sans 3", serif;
+    font-size: 24px;
+    letter-spacing: 1px;
+    font-weight: 300;
+    color: #36454F;
 }
 
 h5 {
@@ -150,5 +168,10 @@ h5 {
     &:hover {
         color: yellow;
     }
+}
+
+circle {
+    color: #D3D3D3;
+    fill: #D3D3D3;
 }
 </style>
